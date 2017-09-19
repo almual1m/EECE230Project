@@ -4,7 +4,7 @@
 #include <sstream>
 int main();
 
-Student::Student(){
+Student::Student() {
     StudentID = 0;
     FirstName = "";
     LastName = "";
@@ -12,13 +12,13 @@ Student::Student(){
     CourseGrade = NULL;
 }
 
-Student::Student (int Student, string First, string Last, string Pass, double *Grade){
+Student::Student (int Student, string First, string Last, string Pass, double *Grade) {
     StudentID = Student;
     FirstName = First;
     LastName = Last;
     password = Pass;
     CourseGrade = Grade;
-    
+
     // TEMPORARY
     CourseName = new string[2];
     CourseName[0] = "math102";
@@ -26,7 +26,7 @@ Student::Student (int Student, string First, string Last, string Pass, double *G
     Number_courses = 2;
 }
 
-void Student:: EnterPassword(){
+void Student:: EnterPassword() {
     cout << "Enter your password: " << endl;
     string Passwordentered;
     cin >> Passwordentered;
@@ -50,7 +50,7 @@ void Student:: PrintOut() {
             cout << "your grade for the course " << CourseName[i] << " is " << CourseGrade[i] << endl;
         }
     }
-    else{
+    else {
         cout << "enter the number course name" << endl;
         string coursename;
         cin >> coursename;
@@ -66,54 +66,59 @@ void Student:: PrintOut() {
     }
 }
 void Student::printOutToTxt() {
-	string Result;//string which will contain the result
-	stringstream convert; // stringstream used for the conversion
-	convert << StudentID;//add the value of Number to the characters in the stream
-	Result = convert.str();//set Result to the content of the stream
-	string s = LastName + "_" + Result + ".txt";
-	ofstream outfile;
-	outfile.open(s);
-	outfile << FirstName << " " << LastName << " , ID: " << StudentID << endl;
-	for (int i = 0; i < 20; i++) {
-		outfile << CourseName[i] << " " << CourseGrade[i] << endl;
-	}
+    string Result;//string which will contain the result
+    stringstream convert; // stringstream used for the conversion
+    convert << StudentID;//add the value of Number to the characters in the stream
+    Result = convert.str();//set Result to the content of the stream
+    string s = LastName + "_" + Result + ".txt";
+    ofstream outfile;
+    outfile.open(s);
+    outfile << FirstName << " " << LastName << " , ID: " << StudentID << endl;
+    for (int i = 0; i < 20; i++) {
+        outfile << CourseName[i] << " " << CourseGrade[i] << endl;
+    }
 }
 
 void Student::checkGPA() {
-	double sum = 0;
-	for (int i = 0; i < 5; i++) {
-		if (CourseGrade[i] != -1) {
-			sum = sum + CourseGrade[i];
-		}
-	}
-	int j=0;
-	for (int i = 0; i < 5; i++) {
-		if (CourseGrade[i] != -1) {
-			j++;
-		}
-	}
-	double avg = sum / (5-j);
-	cout << "Your current GPA is " << avg << "." << endl;
+    double sum = 0;
+    for (int i = 0; i < 5; i++) {
+        if (CourseGrade[i] != -1) {
+            sum = sum + CourseGrade[i];
+        }
+    }
+    int j=0;
+    for (int i = 0; i < 5; i++) {
+        if (CourseGrade[i] != -1) {
+            j++;
+        }
+    }
+    double avg = sum / (5-j);
+    cout << "Your current GPA is " << avg << "." << endl;
 }
 void Student::studentMenu() {
-	int n;
-	cout << "Welcome " << FirstName << ", what do you want to do today?" << endl;
-	cout << "1) Check your grades \n2) Export your grades to a txt file \n3)Check your GPA\n0)Logout";
-	cin >> n;
-	while (n != 0) {
-		switch (n)
-		{
-		case 1: PrintOut();
-			break;
-		case 2: printOutToTxt();
-			break;
-		case 3: checkGPA();
-			break;
-		case 0: cout << "Thank you for your service.\n\n" << endl;
-			break;
-		default: cout << "You entered a wrong number, please try again." << endl;
-			break;
-		}
-	}
-	main();
+    int n;
+    cout << "Welcome " << FirstName << ", what do you want to do today?" << endl;
+    cout << "1) Check your grades \n2) Export your grades to a txt file \n3)Check your GPA\n0)Logout";
+    cin >> n;
+    while (n != 0) {
+        switch (n)
+        {
+        case 1:
+            PrintOut();
+            break;
+        case 2:
+            printOutToTxt();
+            break;
+        case 3:
+            checkGPA();
+            break;
+        case 0:
+            cout << "Thank you for your service.\n\n" << endl;
+            break;
+        default:
+            cout << "You entered a wrong number, please try again." << endl;
+            break;
+        }
+    }
+    main();
 }
